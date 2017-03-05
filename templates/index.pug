@@ -1,0 +1,46 @@
+doctype html
+html(lang="en")
+	include ./partials/_head.pug
+	body
+		include ./partials/_header.pug
+		.app--tweet
+			form
+				.circle--fluid
+					.circle--fluid--cell.circle--fluid--primary.align-bottom.app--tweet--post
+						div(class="app--avatar" style="background-image: url(/static/images/m-spore.png)")
+							img(src="/static/images/m-spore.png")
+						textarea(class="circle--textarea--input" placeholder="What's happening?" id="tweet-textarea")
+						strong#tweet-char.app--tweet--char 140
+					.circle--fluid--cell.align-bottom
+						button.button-primary Tweet
+		.bounds.app--body
+			.app--section--header
+				.grid-33
+					.app--section--heading
+						h2 Timeline
+				.grid-33
+					.app--section--heading
+						strong 129
+						h2 Following
+				.grid-33
+					.app--section--heading
+						h2 Direct Messages
+			include ./partials/_timeline.pug
+			include ./partials/_following.pug
+			include ./partials/_directmessages.pug
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
