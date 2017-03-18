@@ -2,7 +2,8 @@
 
 var T = require('./public/js/config.js'),
 	express = require('express'),
-	moment = require('moment');
+	moment = require('moment'),
+	bodyParser = require('body-parser');
 
 var app = express();
 
@@ -30,6 +31,8 @@ moment.updateLocale('en', {
 });
 
 app.use('/static', express.static(__dirname + '/public'))
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.set('view engine', 'pug');
 app.set('views', __dirname + '/templates');
@@ -40,7 +43,7 @@ T.get('account/verify_credentials', function(err, data, response) {
 	accountList["profileImgURL"] = data.profile_image_url;
 	accountList["profileBgImgURL"] = data.profile_background_image_url;
 	accountList["friendsCount"] = data.friends_count;
-	console.log(accountList);
+	//console.log(accountList);
 
 	T.get('statuses/home_timeline', { count: 5 }, function(err, data, response) {
 
@@ -56,7 +59,7 @@ T.get('account/verify_credentials', function(err, data, response) {
 			return list;
 		});
 
-		console.log(timelineList);
+		//console.log(timelineList);
 
 			T.get('friends/list', { count: 5 }, function(err, data, response) {
 
@@ -69,7 +72,7 @@ T.get('account/verify_credentials', function(err, data, response) {
 					return list;
 				});
 
-				console.log(friendsList);
+				//console.log(friendsList);
 
 				T.get('direct_messages', { count: 5 }, function(err, data, response) {
 
@@ -82,7 +85,7 @@ T.get('account/verify_credentials', function(err, data, response) {
 						return list;
 					});
 
-					console.log(msgList);
+					//console.log(msgList);
 				})
 			})
 	})
@@ -96,6 +99,19 @@ app.get('/', function(req, res) {
 		friendsList: friendsList,
 		msgList: msgList
 	});
+});
+
+app.post('/', function (req, res) {
+
+  T.post('statuses/update', { status: req.body.tweetInput }, function(err, data, response) {
+
+  	res.render('index', { 
+		accountList: accountList,
+		timelineList: timelineList,
+		friendsList: friendsList,
+		msgList: msgList
+	});
+  })
 });
 
 app.listen(3000, function() {

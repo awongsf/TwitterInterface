@@ -4,15 +4,15 @@ html(lang="en")
 	body
 		include ./partials/_header.pug
 		.app--tweet
-			form
+			form(method="post", action="/")
 				.circle--fluid
 					.circle--fluid--cell.circle--fluid--primary.align-bottom.app--tweet--post
 						div(class="app--avatar" style="background-image: url(" + accountList.profileImgURL + ");height: 50px;width: 50px;")
 							img(src=accountList.profileImgURL)
-						textarea(class="circle--textarea--input" placeholder="What's happening?" id="tweet-textarea")
+						textarea(class="circle--textarea--input" name="tweetInput" placeholder="What's happening?" id="tweet-textarea")
 						strong#tweet-char.app--tweet--char 140
 					.circle--fluid--cell.align-bottom
-						button.button-primary Tweet
+						button.button-primary(type="submit") Tweet
 		.bounds.app--body
 			.app--section--header
 				.grid-33
