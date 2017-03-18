@@ -1,53 +1,17 @@
 .grid-33
 	.app--section
 		ul.app--user--list
-			li
-				.circle--fluid
-					.circle--fluid--cell.circle--fluid--primary
-						a.app--tweet--author
-							div.app--avatar(style="background-image: url(/static/images/f-spore.png)")
-								img(src="/static/images/f-spore.png")
-							h4 Jill Spore
-							p @jillspore
-					.circle--fluid--cell
-						a.button.button-text Unfollow
-			li
-				.circle--fluid
-					.circle--fluid--cell.circle--fluid--primary
-						a.app--tweet--author
-							div.app--avatar(style="background-image: url(/static/images/f-spore.png)")
-								img(src="/static/images/f-spore.png")
-							h4 Jill Spore
-							p @jillspore
-					.circle--fluid--cell
-						a.button.button-text Unfollow
-			li
-				.circle--fluid
-					.circle--fluid--cell.circle--fluid--primary
-						a.app--tweet--author
-							div.app--avatar(style="background-image: url(/static/images/f-spore.png)")
-								img(src="/static/images/f-spore.png")
-							h4 Jill Spore
-							p @jillspore
-					.circle--fluid--cell
-						a.button.button-text Unfollow
-			li
-				.circle--fluid
-					.circle--fluid--cell.circle--fluid--primary
-						a.app--tweet--author
-							div.app--avatar(style="background-image: url(/static/images/f-spore.png)")
-								img(src="/static/images/f-spore.png")
-							h4 Jill Spore
-							p @jillspore
-					.circle--fluid--cell
-						a.button Follow
-			li
-				.circle--fluid
-					.circle--fluid--cell.circle--fluid--primary
-						a.app--tweet--author
-							div.app--avatar(style="background-image: url(/static/images/f-spore.png)")
-								img(src="/static/images/f-spore.png")
-							h4 Jill Spore
-							p @jillspore
-					.circle--fluid--cell
-						a.button.button-text Unfollow
+			each index in friendsList
+				li
+					.circle--fluid
+						.circle--fluid--cell.circle--fluid--primary
+							a.app--tweet--author
+								div.app--avatar(style="background-image: url(" + index.profileImageURL + ")")
+									img(src=index.profileImageURL)
+								h4 #{index.name}
+								p @#{index.screenName}
+						.circle--fluid--cell
+							if index.following
+								a.button.button-text Unfollow
+							else
+								a.button Follow
